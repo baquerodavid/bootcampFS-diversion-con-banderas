@@ -1,5 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* CSS RESET */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
 body {
-  font-family: 'Arial', sans-serif;
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* CSS */
+
+body {
+  font-family: 'Roboto', sans-serif;
   background-color: #f0f0f0;
   margin: 0;
   padding: 0;
@@ -7,4 +143,69 @@ body {
 
 h1 {
   color: #333;
+  font-size: 48px;
+  font-weight: 600;
+  margin: 32px;
+}
+
+.countries-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 32px;
+}
+
+.countryCard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  background-color: white;
+  width: 128px;
+}
+
+.img-card {
+  height: 64px;
+}
+
+h2 {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-window {
+  padding: 16px;
+}
+
+.modal-content {
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  width: 500px;
+  display: flex;
+  gap: 24px;
+}
+
+.modal-text {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.img-modal {
+  width: 200px;
+}
+
+.hidden {
+  display: none;
 }
