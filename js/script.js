@@ -1,3 +1,5 @@
+const info = document.getElementById("info");
+
 const countries = async () => {
   try {
     const response = await fetch('https://restcountries.com/v3.1/all?fields=name,flags,car,population,capital,cca2');
@@ -29,10 +31,10 @@ const template = (countries) => {
   });
   console.log(countriesSorted)
   let templateCountry = '';
-  countriesSorted.forEach((country) => {
+  countriesSorted.map((country) => {
     templateCountry += `
     <div class="countryCard" id="${country.cca2}">
-      <img src="${country.flags.svg}" alt="${country.name.common}" class="img-card" />
+      <img src="${country.flags.svg}" alt="${country.flags.alt}" class="img-card" />
       <h2>${country.name.common}</h2>
     </div>
     `;
@@ -41,56 +43,112 @@ const template = (countries) => {
 
   const cards = document.querySelectorAll('.countryCard')
 
-  cards.forEach((card) => {
+  //Adapto mi cards.forEach por el de la Live Review
+  cards.forEach((card, i) => {
     card.addEventListener('click', () => {
-      const code = card.id;
-      console.log('Aquí está el code: ', code);
-      const country = countriesSorted.find(c => c.cca2 === code);
-      console.log(country);
-      showModal(country);
+      const country = countries[i];
+      const { name: { common }, flags, car, population, capital } = country;
+
+      info.classList.add("visible");
+
+      const template = `
+      <section class="result">
+        <div class="info-country">
+        <div class="closed" id="closed">X</div>
+        <img src=${flags.png} alt="${flags.alt}" />
+          <h2>${common}</h2>
+          <p>Capital: ${capital[0]}</p>
+          <p>Población: ${population}</p>
+          <p>Conducción: ${car.side}</p>
+        </div>
+      </section>
+      `
+      info.innerHTML = template;
+    })
+    info.addEventListener("click", (e) => {
+      if (e.target.classList.contains("closed")) {
+        info.classList.remove("visible")
+      }
     })
   })
 }
 
-const createModal = () => {
-  const modal = document.createElement('div');
-  modal.id = "country-modal";
-  modal.classList.add('modal', 'hidden');
-
-  modal.innerHTML = `
-    <div class="modal-window">
-      <div class="modal-content">
-        <img id="modal-flag" src="" alt="" class="img-modal">
-        <div class="modal-text">
-          <h2 id="modal-name"></h2>
-          <p><strong>Capital:</strong> <span id="modal-capital"></span></p>
-          <p><strong>Población:</strong> <span id="modal-population"></span></p>
-          <p><strong>Lado de la carretera:</strong> <span id="modal-car"></span></p>
-        </div>
-      </div>
-      <button id="modal-close">Cerrar</button>
-    </div>
-  `;
-  document.body.appendChild(modal);
-}
-
-const showModal = (country) => {
-  const modal = document.getElementById('country-modal');
-
-  document.getElementById('modal-flag').src = country.flags.svg;
-  document.getElementById('modal-name').textContent = country.name.common;
-  document.getElementById('modal-capital').textContent = country.capital;
-  document.getElementById('modal-population').textContent = country.population;
-  document.getElementById('modal-car').textContent = country.car.side;
-
-  modal.classList.remove('hidden');
-}
-
-document.addEventListener('click', (e) => {
-  if (e.target.id === "modal-close") {
-    document.getElementById('country-modal').classList.add('hidden');
-  }
-});
-
-createModal();
 countries().then((data) => template(data));
+
+// 👇 CODIGO DE LA LIVE REVIEW EMPIEZA DESDE AQUÍ 👇
+
+// traernos la info de la API https://restcountries.com/v3.1/all?fields=name,flags,car,population,capital OK
+// ponerlas en la pantalla -> name y flag OK
+// ordenar por nombre ok
+// al clickar saldrá la info por encima con todo (todas las fields) ok
+//botón para cerrar el flotante ok
+//todo funcione ok
+
+// fetch("https://restcountries.com/v3.1/all?fields=name,flags,car,population,capital")
+// .then(response => response.json())
+// .then(data => console.log(data))
+
+/* const countriesList = document.getElementById("countries-list")
+const info = document.getElementById("info")
+
+async function getCountries() {
+  try {
+    const response = await fetch("https://restcountries.com/v3.1/all?fields=name,flags,car,population,capital")
+    const data = await response.json()
+    sortedCountries(data)
+    return data
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+function sortedCountries(countries) {
+  countries.sort((a, b) => {
+    const nameA = a.name.common.toUpperCase()
+    const nameB = b.name.common.toUpperCase()
+    return nameA.localeCompare(nameB, "es") //-> compara por idioma
+  })
+}
+
+getCountries().then(countries => {
+  const allCountries = countries.map(country => {
+    const { name: { common }, flags } = country
+    const template = `
+    <li class="card">
+      <img src=${flags.png} alt="${flags.alt}" />
+      <h2>${common}</h2>
+    </li>
+    `
+    return template
+  }).join("")
+  countriesList.innerHTML = allCountries
+
+  const cards = document.querySelectorAll(".card")
+  cards.forEach((card, i) => {
+    card.addEventListener("click", () => {
+      const country = countries[i]
+      const { name: { common }, flags, car, population, capital } = country
+
+      info.classList.add("visible")
+
+      const template = `
+      <section class="result">
+        <div class="info-county">
+        <div class="closed" id="closed">X</div>
+          <h2>${common}</h2>
+          <p>Capital: ${capital[0]}</p>
+          <img src=${flags.png} alt="${flags.alt}" />
+          <p>Población: ${population}</p>
+          <p>Conducción: ${car.side}</p>
+        </div>
+      </section>
+      `
+      info.innerHTML = template
+    })
+    info.addEventListener("click", (e) => {
+      if (e.target.classList.contains("closed")) {
+        info.classList.remove("visible")
+      }
+    })
+  })
+}) */

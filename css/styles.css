@@ -163,6 +163,7 @@ h1 {
   border-radius: 4px;
   background-color: white;
   width: 128px;
+  cursor: pointer;
 }
 
 .img-card {
@@ -175,37 +176,76 @@ h2 {
   line-height: 1.25;
 }
 
-.modal {
-  position: fixed;
-  inset: 0;
+
+/* 👇 CODIGO DE LA LIVE REVIEW EMPIEZA DESDE AQUÍ (lo he actualizado para mejorar el layout) 👇 */
+
+/* body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  color: #333;
+}
+
+ul {
+  padding: 20px;
   display: flex;
-  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  list-style: none;
+} 
+
+.card {
+  width: 250px;
+}
+
+.card img {
+  width: 100%;
+}
+*/
+
+.info {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.428);
+  display: none;
+}
+
+.result {
+  display: flex;
   justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
-.modal-window {
-  padding: 16px;
-}
-
-.modal-content {
-  background: white;
+.info-country {
+  background-color: white;
   padding: 16px;
   border-radius: 8px;
-  width: 500px;
-  display: flex;
-  gap: 24px;
-}
-
-.modal-text {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 250px;
 }
 
-.img-modal {
-  width: 200px;
+.visible {
+  display: block;
 }
 
-.hidden {
-  display: none;
+.closed,
+.card {
+  cursor: pointer;
+}
+
+.closed:hover {
+  color: darkred;
 }
